@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--滚轮的插件-->
+    <link rel="stylesheet" href="css/jquery.fullpage.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div id="box">
+    <!--第一屏-->
+    <div class="section first">
+        <!--LOGO部分-->
+        <div class="logo"></div>
+        <!--文字动画部分-->
+        <div class="text">
+            <img src="images/text_1.png" alt="">
+            <img src="images/text_2.png" alt="">
+            <img src="images/text_3.png" alt="">
+            <img src="images/text_4.png" alt="">
+            <img src="images/text_5.png" alt="">
+            <img src="images/text_6.png" alt="">
+            <img src="images/text_7.png" alt="">
+            <img src="images/text_8.png" alt="">
+        </div>
+        <!--安全 爽快 智能-->
+        <div class="info"></div>
+    </div>
+    <!--第二屏-->
+    <div class="section second ">
+        <!--盾牌-->
+        <div class="shield">
+            <img src="images/shield_1.png" alt="">
+            <img src="images/shield_2.png" alt="">
+            <img src="images/shield_3.png" alt="">
+            <img src="images/shield_4.png" alt="">
+            <img src="images/shield_5.png" alt="">
+            <img src="images/shield_6.png" alt="">
+            <img src="images/shield_7.png" alt="">
+            <img src="images/shield_8.png" alt="">
+            <img src="images/shield_9.png" alt="">
+        </div>
+        <!--信息-->
+        <div class="info2"></div>
+    </div>
+    <!--第三屏-->
+    <div class="section third">
+        <!--信息-->
+        <div class="info3"></div>
+        <!--圆环-->
+        <div class="circle"></div>
+        <!--小火箭-->
+        <div class="rocket"></div>
+    </div>
+    <!--第四屏-->
+    <div class="section fourth">
+        <!--搜索-->
+        <div class="search">
+            <div class="input"></div>
+            <div class="key"></div>
+            <div class="result">
+                <div class="res"></div>
+            </div>
+        </div>
+        <!--信息-->
+        <div class="info4"></div>
+    </div>
+    <!--第五屏-->
+  <div class="section fifth active">
+    <!--信息-->
+    <div class="info5"></div>
+    <!--浏览器显示-->
+    <div class="broswer">
+      <!--四边框-->
+      <div class="topline"></div>
+      <div class="bottomline"></div>
+      <div class="leftline"></div>
+      <div class="rightline"></div>
+      <!--工具栏-->
+      <div class="toolbar">
+      </div>
+      <div class="toolbox">
+      </div>
+      <!--底部的线-->
+      <div class="line"></div>
+      <div class="extra"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.fullpage.js"></script>
+<script>
+    $(function(){
+        $('#box').fullpage({
+            sectionsColor:['skyblue','pink','darkcyan','crimson','yellowgreen'],
+            scrollingSpeed:500,
+            afterLoad: function(link,index){
+                setTimeout(function() {
+                    $('.section').removeClass('current');
+                    $('.section').eq(index - 1).addClass('current');
+                },50)
+            }
+        });
+    });
+</script>
+</body>
+</html>

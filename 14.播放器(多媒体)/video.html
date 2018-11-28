@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="css/font-awesome.css">
+  <style>
+    .player{
+      width: 800px;
+      height: 500px;
+      margin:50px auto;
+      border-radius:15px;
+      display:flex;
+    }
+    .left{
+      flex:4;
+      border-radius:15px;
+      display:flex;
+      flex-direction: column;
+    }
+    .list{
+      flex:1;
+      border-radius:15px;
+      background: skyblue;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .list li{
+      width:100%;
+      height:40px;
+      line-height:40px;
+      text-align: center;
+      margin-bottom: 5px;
+      background: orange;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    .video-box{
+      flex:6;
+      height:425px;
+      border-radius: 10px;
+      background: #f05858;
+    }
+    video{
+      width:100%;
+      height:100%;
+    }
+    /*视频控件*/
+    .control{
+      flex:1;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #f05858;
+    }
+    .control > * {
+      cursor: pointer;
+    }
+    .progress{
+      height:10px;
+      background: #ccc;
+      flex: 7;
+    }
+    .pin{
+      height:100%;
+      width:5%;
+      background: #f05858 ;
+    }
+    .play-btn,
+    .volume-btn,
+    .full-btn{
+      flex:1;
+    }
+    .volume-btn{
+      position:relative;
+    }
+    .range{
+      position:absolute;
+      top:-75px;
+      left:-35px;
+      transform: rotate(-90deg);
+      display:none;
+    }
+    .volume-btn:hover .range {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <!--左边: 视频播放区域-->
+    <div class="left">
+      <!--视频播放-->
+      <div class="video-box">
+        <video src="video/movie03.mp4"></video>
+      </div>
+      <!--视频控件-->
+      <div class="control">
+        <!--播放-->
+        <span class="play-btn fa fa-play"></span>
+        <!--进度条-->
+        <div class="progress">
+          <div class="pin"></div>
+        </div>
+        <!--音量-->
+        <span class="volume-btn fa fa-volume-up">
+          <input type="range" class="range" max="100" min="0" value="80">
+        </span>
+        <!--全屏-->
+        <span class="full-btn fa fa-arrows-alt"></span>
+      </div>
+    </div>
+    <!--右边: 目录文件显示区域-->
+    <ul class="list">
+      <li data-src="video/movie01.mp4">谷歌</li>
+      <li data-src="video/movie02.mp4">兔子</li>
+      <li data-src="video/movie03.mp4">每日一囧</li>
+      <li data-src="video/movie04.mp4">轻松时刻</li>
+    </ul>
+  </div>
+  <script>
+    //获取需要用到的元素
+    var playBtn = document.querySelector('.play-btn');
+    var video = document.querySelector('video');
+    var progress = document.querySelector('.progress');
+    var pin = document.querySelector('.pin');
+    var range = document.querySelector('.range');
+    var fullBtn = document.querySelector('.full-btn');
+    var lis = document.querySelectorAll('.list>li');
+
+    //1. 视频播放--暂停功能
+    playBtn.onclick = function () {
+      //1.1 判断视频是否暂停
+      if(video.paused){
+        //1.2  改变按钮的暂停和播放状态
+        video.play();
+
+      }else{
+        video.pause();
+
+      }
+    }
+    
+    //2. 视频播放的进度条自动同步
+    video.ontimeupdate = function () {
+//      console.log(this.currentTime);  //当前的播放时间
+//      console.log(this.duration);     //视频的总时长
+        //比值=当前播放时间/总时长
+        var value = (this.currentTime / this.duration)*100 + '%';
+        pin.style.width = value;
+    }
+
+    //3.点击进度条,切换视频播放速度
+    progress.onclick = function (e) {
+      //求出当前播放时间
+      //console.log(e.offsetX);
+      var cTime = e.offsetX / this.offsetWidth * video.duration;
+      console.log(cTime);
+      video.currentTime = cTime;
+    }
+
+    //4. 调整视频的音量
+    range.onchange = function () {
+      console.log(this.value)
+      video.volume = this.value / 100;
+    }
+
+    //5. 全屏功能
+    fullBtn.onclick = function () {
+      video.webkitRequestFullScreen();
+    }
+
+    //6.切换视频
+    lis.forEach(function(v,i) {
+      v.onclick = function () {
+        video.src = this.dataset.src;
+        video.load();
+        video.play();
+      }
+    })
+
+    //7.优化:只要视频播放,显示暂停图标;视频停止,显示播放图标
+    video.onplay = function () {
+      //1.3 视频播放,添加暂停,移除播放图标
+      playBtn.classList.add('fa-pause');
+      playBtn.classList.remove('fa-play');
+    }
+
+    video.onpause = function () {
+      playBtn.classList.add('fa-play');
+      playBtn.classList.remove('fa-pause');
+    }
+
+  </script>
+</body>
+</html>

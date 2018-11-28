@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{
+      padding:0;
+      padding:0;
+      background: rgba(0,190,255,.5);
+      overflow: hidden;
+    }
+    .bigBox {
+      width: 510px;
+      height: 270px;
+      /*border: 1px solid #000;*/
+      margin: 100px auto;
+      /*移动*/
+      animation: swim 15s infinite linear;
+    }
+    /*鲨鱼部分*/
+    .shark{
+      width: 100%;
+      height: 100%;
+      background:url('images/shark1.png');
+      animation: shark 1.5s steps(7) infinite;
+    }
+    /*鲨鱼换背景*/
+    @keyframes shark{
+      0%{
+        background-position: left top;
+      }
+      100%{
+        background-position: left -1890px;
+      }
+    }
+    /*大盒子移动*/
+    @keyframes swim{
+      0%{
+        transform: translateX(-800px);
+      }
+      100%{
+        transform: translateX(1000px);
+      }
+    }
+
+    /*小鱼部分*/
+    .smallBox{
+      width: 174px;
+      height: 126px;
+      position:absolute;
+      right:0;
+      bottom:0;
+      animation: swim1 10s infinite ;
+    }
+    .fish{
+      width: 100%;
+      height: 100%;
+      background: url('images/fish8.png') no-repeat left top;
+      transform: rotateY(180deg);
+      animation: fish 1.5s steps(12) infinite;
+    }
+    /*换背景*/
+    @keyframes fish {
+      0%{
+        background-position:left top;
+      }
+      100%{
+        background-position:left -1512px;
+      }
+    }
+    /*小盒子移动*/
+    @keyframes swim1 {
+      0%{
+        transform: translate(0px,0px);
+      }
+      /*75%{*/
+        /*transform: rotate(-45deg) translateX(500px);*/
+      /*}*/
+      100%{
+        transform: translate(-900px,-200px);
+      }
+    }
+  </style>
+</head>
+<body>
+<!--大盒子负责移动-->
+  <div class="bigBox">
+    <!--小盒子鲨鱼负责换背景-->
+    <div class="shark"></div>
+  </div>
+<!--小盒子负责移动-->
+<div class="smallBox">
+  <!--小盒子负责换背景-->
+  <div class="fish"></div>
+</div>
+
+</body>
+</html>

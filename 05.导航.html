@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body,ul,li{
+      padding:0;
+      margin:0;
+    }
+    ul{
+      list-style: none;
+      position:relative;
+    }
+    body{
+      background-color: #ccc;
+    }
+    .nav{
+      width:800px;
+      height:50px;
+      margin: 100px auto;
+    }
+    .nav li{
+      width:160px;
+      height:50px;
+      line-height: 50px;
+      text-align: center;
+      float:left;
+      transition: transform 1s;
+    }
+    span{
+      float: left;
+      width: 30px;
+      height: 50px;
+      background-color: #fff;
+    }
+    ul::before,
+    ul::after{
+      content:'';
+      position: absolute;
+      left:-50px;
+      top:0;
+      width: 50px;
+      height: 50px;
+      background-color: #fff;
+    }
+    ul::after{
+      left:auto;
+      right:-50px;
+    }
+    .center{
+      width:100px;
+      text-align: center;
+      line-height:50px;
+      font-size: 20px;
+    }
+    li:hover .left{
+      transform-origin:left;
+      transform:skewY(-30deg);
+      background-color: #f1f1f1;
+    }
+    li:hover .center{
+      transform:translateY(-17px);
+      box-shadow: 0px 20px 20px -10px #666;
+    }
+    li:hover .right{
+      transform-origin: right;
+      transform:skewY(30deg);
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <ul>
+      <li>
+        <span class="left"></span>
+        <span class="center">JiVian</span>
+        <span class="right"></span>
+      </li>
+      <li>
+        <span class="left"></span>
+        <span class="center">JiVian</span>
+        <span class="right"></span>
+      </li>
+      <li>
+        <span class="left"></span>
+        <span class="center">JiVian</span>
+        <span class="right"></span>
+      </li>
+      <li>
+        <span class="left"></span>
+        <span class="center">JiVian</span>
+        <span class="right"></span>
+      </li>
+      <li>
+        <span class="left"></span>
+        <span class="center">JiVian</span>
+        <span class="right"></span>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

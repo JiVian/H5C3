@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{
+      background: #f7c8c8;
+    }
+    .box{
+      position:relative;
+      width: 250px;
+      height: 250px;
+      margin:100px auto;
+      border:5px solid #1b3650;
+      border-radius: 50%;
+      background: darkseagreen;
+    }
+    .box * {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .line,.line1,.line2,.line3,.line4,.line5{
+      width:100%;
+      height:2px;
+      background: orange;
+    }
+    .line,.line3{
+      height:5px;
+    }
+    .line{
+      transform:translate(-50%,-50%);
+    }
+    .line1{
+      transform:translate(-50%,-50%) rotate(30deg);
+    }
+    .line2{
+      transform:translate(-50%,-50%) rotate(60deg);
+    }
+    .line3{
+      transform:translate(-50%,-50%) rotate(90deg);
+    }
+    .line4{
+      transform:translate(-50%,-50%) rotate(120deg);
+    }
+    .line5{
+      transform:translate(-50%,-50%) rotate(150deg);
+    }
+    .cover{
+      height:200px;
+      width:200px;
+      border-radius:50%;
+      background: darkseagreen;
+    }
+    .hour{
+      height:40px;
+      width:6px;
+      background: black;
+      margin-top: -20px;
+      transform-origin: center bottom;
+      animation: rot 7200s infinite steps(60);
+    }
+    .min{
+      height:60px;
+      width:4px;
+      background: green;
+      margin-top: -30px;
+      transform-origin: center bottom;
+      animation:rot 3600s infinite steps(60);
+    }
+    .second{
+      height:80px;
+      width:2px;
+      background: crimson;
+      margin-top:-40px;
+      transform-origin: center bottom;
+      animation: rot 60s infinite steps(60);
+    }
+    .center{
+      width:20px;
+      height: 20px;
+      border-radius: 50%;
+      background: orange;
+    }
+    @keyframes rot {
+      0%{
+        transform:translate(-50%,-50%) rotate(0deg);
+      }
+      100%{
+        transform:translate(-50%,-50%) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <!--表的刻度-->
+    <div class="line"></div>
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+    <div class="line4"></div>
+    <div class="line5"></div>
+    <!--表盘-->
+    <div class="cover"></div>
+
+    <!--时针-->
+    <div class="hour"></div>
+    <!--分针-->
+    <div class="min"></div>
+    <!--秒针-->
+    <div class="second"></div>
+    <!--中心点-->
+    <div class="center"></div>
+  </div>
+  <script src="./lineTool.js"></script>
+</body>
+</html>

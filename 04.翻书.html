@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{
+      height:600px;
+      background-image: linear-gradient(to bottom, pink 10%,yellow 100%);
+    }
+    .book{
+      width:250px;
+      height:300px;
+      margin:100px auto;
+      position:relative;
+      text-align: center;
+      /*斜切样式*/
+      transform:skewY(-10deg);
+      /*让子盒子保持3d效果*/
+      transform-style:preserve-3d;
+      /*辅助样式*/
+      transform:rotateX(14deg) rotateY(-17deg);
+
+    }
+    .book span{
+      width:100%;
+      height:100%;
+      line-height: 300px;
+      font-size: 40px;
+      border:2px solid darkred;
+      background-image:linear-gradient(45deg,skyblue 10%,orange 100%);
+      color:rgba(255,255,0,.6);
+      position:absolute;
+      top:0;
+      left:0;
+      transform-origin:left;
+      transition:transform 2s;
+    }
+  </style>
+</head>
+<body>
+  <div class="book">
+    <span>A</span>
+    <span>L</span>
+    <span>E</span>
+    <span>X</span>
+    <span>JiVian</span>
+    <span>YYT</span>
+  </div>
+  <script>
+    var book = document.querySelector('.book');
+    var span = document.querySelectorAll('span');
+    console.log(span);
+    span.forEach(function(v,i,arr){
+      v.style.transform = 'rotateY('+ (i+3) +'deg)';
+      //v.style.transform = 'translateX('+ (20+i) +'px)';
+    })
+
+    book.onmouseover = function () {
+      span.forEach(function(v,i,arr){
+        v.style.transform = 'rotateY('+ (-180 + i*10) +'deg)';
+        v.style.transitionDelay = ''+(i *1.5)+'s';
+      })
+    }
+    book.onmouseout = function () {
+      span.forEach(function(v,i,arr){
+        v.style.transform = 'rotateY(0deg)';
+        v.style.transitionDelay = ''+(i *1.5)+'s';
+      })
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body,ul{
+      margin: 0;
+      padding: 0;
+    }
+    ul{
+      list-style: none;
+    }
+    a{
+      text-decoration: none;
+    }
+    .box{
+      width: 500px;
+      height: 300px;
+      margin:100px auto;
+      position:relative;
+    }
+    .box li{
+      float:left;
+      position:relative;
+      width:100px;
+      height:300px;
+      transform-style: preserve-3d;
+      /*transform:rotateX(0deg) rotateY(-29deg);*/
+      transition: transform 1s;
+    }
+    span{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+    }
+
+    /*将li的span转换成立体*/
+    span:nth-child(1){
+      background: rgba(255,255,0,.4);
+      transform: translateZ(150px);
+    }
+    span:nth-child(2){
+      background: rgba(0,255,0,.4);
+      transform: translateY(-150px) rotateX(90deg);
+    }
+    span:nth-child(3){
+      background: rgba(0,0,255,.4);
+      transform: translateZ(-150px) rotateX(180deg);
+    }
+    span:nth-child(4){
+      background: rgba(255,0,0,.4);
+      transform: translateY(150px) rotateX(-90deg);
+    }
+    /*给每个li加入背景图,使用背景定位进行更换*/
+    li span:nth-child(1){
+      background: url('images/liu01.jpg');
+      background-size: cover;
+    }
+    li span:nth-child(2){
+      background: url('images/liu02.jpg');
+      background-size: cover;
+    }
+    li span:nth-child(3){
+      background: url('images/liu03.jpg');
+      background-size: cover;
+    }
+    li span:nth-child(4){
+      background: url('images/liu04.jpg');
+      background-size: cover;
+    }
+    /*背景定位： 每个li的背景定位不同*/
+    /*获取第2个li中所有的span*/
+    li:nth-child(2) span{
+      background-position:-100px 0;
+    }
+    li:nth-child(3) span{
+      background-position:-200px 0;
+    }
+    li:nth-child(4) span{
+      background-position:-300px 0;
+    }
+    li:nth-child(5) span{
+      background-position:-400px 0;
+    }
+    .left,
+    .right{
+      position:absolute;
+      left: 0;
+      top: 50%;
+      width:30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background: blue;
+      font-size:30px;
+      color:white;
+    }
+    .right{
+      left:auto;
+      right:0;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <ul>
+      <li>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </li>
+      <li>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </li>
+      <li>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </li>
+      <li>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </li>
+      <li>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </li>
+    </ul>
+    <!--a标签要放在ul外面  否则点击会不正常-->
+    <a href="javascript:;" class="left"> < </a>
+    <a href="javascript:;" class="right"> > </a>
+  </div>
+
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+    var index = 0;     //记录当前的轮播图片
+    var isEnd = true;  //记录动画是否结束
+
+    //点击 > 的效果
+    $('.right').click(function () {
+      if(!isEnd){  //上次动画没有结束,下次动画不会开始
+        return;
+      }
+      isEnd = false;
+
+      index++;
+      //角度
+      var r = index * (-90);
+      $('li').css('transform','rotateX('+r+'deg)');
+      //设置延迟
+      $('li').each(function (index,ele) {
+        $(ele).css('transitionDelay', index * 0.2 +'s');
+      })
+    })
+
+    //点击 < 的效果
+    $('.left').click(function () {
+//      if(! isEnd){
+//        return;
+//      }
+//      isEnd = false;
+
+      index--;
+      var r = index * (-90);
+      $('li').css('transform','rotateX('+r+'deg)');
+      $('li').each(function (index,ele) {
+        $(ele).css('transitionDelay',index * 0.2 + 's');
+      })
+    })
+
+      //过渡事件,本次动画没有结束,下次点击无效
+      //最后一个li的动画结束表示整个动画结束
+     $('li:last-child').on('transitionend', function() {
+        isEnd = true;  //动画结束
+     })
+
+
+  </script>
+</body>
+</html>
